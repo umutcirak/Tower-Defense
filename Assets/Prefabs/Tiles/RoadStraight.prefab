@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1726795160551354749, guid: 02617b778252ebf4382530f479a398d3, type: 3}
       propertyPath: m_Name
-      value: Tile_Road
+      value: RoadStraight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271404556823270183, guid: 02617b778252ebf4382530f479a398d3, type: 3}
+      propertyPath: freeArea
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9119114616653227306, guid: 02617b778252ebf4382530f479a398d3, type: 3}
       propertyPath: m_Mesh
