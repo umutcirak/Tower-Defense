@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
 
     void Start()
     {
-        closerEnemy = FindObjectOfType<EnemyMover>().transform;
+        StartCoroutine(SetCloserEnemy());
     }
     void Update()
     {
@@ -18,6 +18,12 @@ public class Target : MonoBehaviour
     }
 
 
+
+    IEnumerator SetCloserEnemy()
+    {
+        yield return new WaitForSeconds(1);
+        closerEnemy = FindObjectOfType<EnemyMover>().transform;
+    }
 
 
 

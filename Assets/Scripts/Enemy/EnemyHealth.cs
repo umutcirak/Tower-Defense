@@ -15,16 +15,15 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        DestroyEnemy();
+        DeaActivateEnemy();
     }
 
 
-    void DestroyEnemy()
+    void DeaActivateEnemy()
     {
         if(health > 1) { return; }
 
-        gameObject.SetActive(false);
-        Destroy(gameObject);
+        gameObject.SetActive(false);        
 
     }
 

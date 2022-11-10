@@ -4,22 +4,36 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
+    private static (float, float) startPoint = (0f, 0f); // x,z                                                    
 
     [Range(10f,50f)][SerializeField] float speed;
-    [SerializeField] List<Waypoint> path;
+    [SerializeField] float yPos = 4.5f;
 
-    void Start()
-    {
+    [SerializeField] GameObject[] waypoints;
+    
+
+    
+    void OnEnable()
+    {       
+        FindPath();
+        ReturnFirstWayPoint();
         StartCoroutine(FollowPath());
-    }   
-    void Update()
+    }      
+
+
+    void FindPath()
     {
-        
+        waypoints = GameObject.FindGameObjectsWithTag("Path");
+        SortWayPoints();
     }
 
     IEnumerator FollowPath()
     {
-        foreach (Waypoint waypoint in path)
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+
+        }
+        foreach (GameObject waypoint in waypoints)
         {            
             Vector3 waypointPos = waypoint.transform.position;
             
@@ -31,39 +45,72 @@ public class EnemyMover : MonoBehaviour
                 transform.LookAt(targetPos);
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
-            }
+            }      
 
-            /*
-             
-            Vector3 targetXPos = new Vector3(waypointPos.x, transform.position.y, transform.position.z);
-            Vector3 targetZPos = new Vector3(transform.position.x, transform.position.y, waypointPos.z);
+        }
+        gameObject.SetActive(false);
+    }
 
-            // FIRST GO PATH On X
-            while (transform.position.x != targetPos.x)
+    void ReturnFirstWayPoint()
+    {
+        Transform start = waypoints[0].transform;
+        Vector3 startPos = new Vector3(start.position.x, yPos, start.position.z);
+        transform.position = startPos;
+       
+    }
+
+    void SortWayPoints()
+    {
+        // Item1: Index, Item2: Distance
+        float[] distanceList = new float[waypoints.Length];
+        float distance;
+
+        // Calculate all distance of waypoints to start point.
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            float distanceX = waypoints[i].transform.position.x - startPoint.Item1;
+            float distanceZ = waypoints[i].transform.position.z - startPoint.Item2;
+
+            distance = Mathf.Pow(distanceX, 2f) + Mathf.Pow(distanceZ, 2f);
+
+            distanceList[i] = distance;
+        }
+        foreach ( float x in distanceList)
+        {
+            Debug.Log(x);
+        }
+
+        bubbleSort(distanceList);        
+
+    }
+
+
+    public void bubbleSort(float[] list)
+    {
+        for (int i = 0; i < list.Length; i++)
+        {
+            for (int j = i + 1; j < list.Length; j++)
             {
-                transform.LookAt(targetXPos);
-                transform.position = Vector3.MoveTowards(transform.position, targetXPos, speed * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
+                if (list[i] > list[j])
+                {
+                    float tempDist = list[i];
+                    list[i] = list[j];
+                    list[j] = tempDist;
+
+
+                    GameObject temp = waypoints[i];
+                    waypoints[i] = waypoints[j];
+                    waypoints[j] = temp;
+                }
             }
-
-            // Then Go Path On Z
-            while (transform.position.z != targetPos.z)
-            {
-                transform.LookAt(targetZPos);
-                transform.position = Vector3.MoveTowards(transform.position, targetZPos, speed * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
-            }
-            */
-
-
-
-            // transform.position = new Vector3(waypointPos.x, transform.position.y, waypointPos.z);
 
         }
     }
 
-  
-       
-        
-    
+
+
+
+
+
+
 }
