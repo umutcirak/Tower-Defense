@@ -5,7 +5,15 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health;
+    [SerializeField] int enemyValue;
 
+
+    JPMorgan bank;
+
+    private void Awake()
+    {
+        bank = FindObjectOfType<JPMorgan>();
+    }
 
     void OnParticleCollision(GameObject other)
     {
@@ -23,7 +31,9 @@ public class EnemyHealth : MonoBehaviour
     {
         if(health > 1) { return; }
 
-        gameObject.SetActive(false);        
+        gameObject.SetActive(false);
+
+        bank.IncreaseMoneyByEnemy(enemyValue);
 
     }
 

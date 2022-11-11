@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 92475008413043928}
   - component: {fileID: 1176904921}
   - component: {fileID: 8747122892622980849}
+  - component: {fileID: -3130085003144609631}
   m_Layer: 0
   m_Name: Ram
   m_TagString: Untagged
@@ -144,17 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  path:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  yPos: 4.5
+  waypoints: []
 --- !u!114 &8747122892622980849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,4 +159,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94b72767ce19b54398cb06a65c9f13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 10
+  enemyValue: 80
+--- !u!114 &-3130085003144609631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524309648353857961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f077f00afd37a848a4337b23613374d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

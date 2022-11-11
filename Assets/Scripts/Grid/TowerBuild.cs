@@ -7,7 +7,14 @@ public class TowerBuild : MonoBehaviour
     [SerializeField] GameObject tower;
     [SerializeField] bool freeArea;
     [SerializeField] float yPos;
-    
+
+    JPMorgan bank;
+
+    private void Awake()
+    {
+        bank = FindObjectOfType<JPMorgan>();
+    }
+
     private Vector3 position;
     private bool hasTower;
 
@@ -20,9 +27,15 @@ public class TowerBuild : MonoBehaviour
     {
         if (freeArea && !hasTower)
         {
+            int cost = tower.GetComponent<Tower>().cost;            
+            if(cost > bank.balance) { return; }
+
             GameObject newTower = GameObject.Instantiate(tower, position, Quaternion.identity);
             newTower.transform.parent = GameObject.Find("Towers").transform;
             newTower.name = ( newTower.name + " " + transform.position.x + ", " + transform.position.z);
+                        
+            bank.DecreaseMoneyByTower(cost);
+
             hasTower = true;
         }        
     }

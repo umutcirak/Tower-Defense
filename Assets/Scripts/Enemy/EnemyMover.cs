@@ -10,9 +10,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float yPos = 4.5f;
 
     [SerializeField] GameObject[] waypoints;
-    
-
-    
+        
     void OnEnable()
     {       
         FindPath();
@@ -29,10 +27,7 @@ public class EnemyMover : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-
-        }
+       
         foreach (GameObject waypoint in waypoints)
         {            
             Vector3 waypointPos = waypoint.transform.position;
@@ -75,11 +70,7 @@ public class EnemyMover : MonoBehaviour
 
             distanceList[i] = distance;
         }
-        foreach ( float x in distanceList)
-        {
-            Debug.Log(x);
-        }
-
+        
         bubbleSort(distanceList);        
 
     }
