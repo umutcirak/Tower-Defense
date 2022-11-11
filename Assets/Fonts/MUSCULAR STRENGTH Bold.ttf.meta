@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 68765e65e6cf4bd42a2209611b9b81cc
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - MUSCULAR STRENGTH
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 87a4e318975913e4e869060cc8f073f5, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

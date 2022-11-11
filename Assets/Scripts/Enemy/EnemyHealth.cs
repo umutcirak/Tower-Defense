@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health;
-    [SerializeField] int enemyValue;
 
+    [SerializeField] int enemyValue;
+    [SerializeField] int rewardPerHit;
 
     JPMorgan bank;
 
@@ -17,8 +18,8 @@ public class EnemyHealth : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        health--;
-        Debug.Log(health);
+
+        TakeHit();
     }
 
     void Update()
@@ -33,8 +34,14 @@ public class EnemyHealth : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        bank.IncreaseMoneyByEnemy(enemyValue);
+        bank.IncreaseBalanceByEnemy(enemyValue);
 
+    }
+
+    void TakeHit()
+    {
+        health--;
+        bank.IncreaseBalanceByHit(rewardPerHit);
     }
 
 }

@@ -28,13 +28,13 @@ public class TowerBuild : MonoBehaviour
         if (freeArea && !hasTower)
         {
             int cost = tower.GetComponent<Tower>().cost;            
-            if(cost > bank.balance) { return; }
+            if(cost > bank.Balance) { return; }
 
             GameObject newTower = GameObject.Instantiate(tower, position, Quaternion.identity);
             newTower.transform.parent = GameObject.Find("Towers").transform;
             newTower.name = ( newTower.name + " " + transform.position.x + ", " + transform.position.z);
                         
-            bank.DecreaseMoneyByTower(cost);
+            bank.DecreaseBalanceByTower(cost);
 
             hasTower = true;
         }        

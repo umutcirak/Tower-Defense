@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class JPMorgan : MonoBehaviour
 {
-    public int balance = 0;
+
+    [SerializeField] private int balance;
+    public int Balance { get { return balance; } }
 
     JPMorgan instance;
     void Awake()
@@ -27,14 +29,19 @@ public class JPMorgan : MonoBehaviour
     }
 
 
-    public void DecreaseMoneyByTower(int towerCost)
+    public void DecreaseBalanceByTower(int towerCost)
     {
-        balance -= towerCost;
+        balance -= Mathf.Abs(towerCost);
     }
 
 
-    public void IncreaseMoneyByEnemy(int enemyValue)
+    public void IncreaseBalanceByEnemy(int enemyValue)
     {
-        balance += enemyValue;
+        balance += Mathf.Abs(enemyValue);
+    }
+
+    public void IncreaseBalanceByHit(int hitReward)
+    {
+        balance += Mathf.Abs(hitReward);
     }
 }

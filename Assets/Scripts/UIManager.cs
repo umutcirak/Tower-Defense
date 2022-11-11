@@ -12,8 +12,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        previousMoney = bank.balance;
-        moneyLeft.text = bank.balance.ToString();
+        previousMoney = bank.Balance;
+        moneyLeft.text = bank.Balance.ToString();
     }
 
     private void Awake()
@@ -29,10 +29,10 @@ public class UIManager : MonoBehaviour
 
     void SetMoneyLeft()
     {
-        if(previousMoney == bank.balance) { return; } // if wallet is same don't update
+        if(previousMoney == bank.Balance) { return; } // if wallet is same don't update
 
-        previousMoney = bank.balance;
-        moneyLeft.text = bank.balance.ToString();
+        previousMoney = bank.Balance;
+        moneyLeft.text = bank.Balance.ToString();
         
     }
 
