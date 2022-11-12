@@ -8,9 +8,12 @@ public class EnemyMover : MonoBehaviour
 
     [Range(10f,50f)][SerializeField] float speed;
     [SerializeField] float yPos = 4.5f;
+    [SerializeField] int enemyDamage;
 
-    [SerializeField] GameObject[] waypoints;
-        
+    [SerializeField] Waypoint[] waypoints;
+
+       
+
     void OnEnable()
     {       
         FindPath();
@@ -21,14 +24,15 @@ public class EnemyMover : MonoBehaviour
 
     void FindPath()
     {
-        waypoints = GameObject.FindGameObjectsWithTag("Path");
+        GameObject path = GameObject.FindGameObjectWithTag("Path");
+        waypoints = path.GetComponentsInChildren<Waypoint>();
         SortWayPoints();
     }
 
     IEnumerator FollowPath()
     {
        
-        foreach (GameObject waypoint in waypoints)
+        foreach (Waypoint waypoint in waypoints)
         {            
             Vector3 waypointPos = waypoint.transform.position;
             
@@ -44,12 +48,14 @@ public class EnemyMover : MonoBehaviour
 
         }
         gameObject.SetActive(false);
+        FindObjectOfType<JPMorgan>().DecreaseHealthByEnemy(enemyDamage);
     }
 
     void ReturnFirstWayPoint()
     {
         Transform start = waypoints[0].transform;
         Vector3 startPos = new Vector3(start.position.x, yPos, start.position.z);
+        Debug.Log(waypoints[0].transform.position);
         transform.position = startPos;
        
     }
@@ -89,7 +95,7 @@ public class EnemyMover : MonoBehaviour
                     list[j] = tempDist;
 
 
-                    GameObject temp = waypoints[i];
+                    Waypoint temp = waypoints[i];
                     waypoints[i] = waypoints[j];
                     waypoints[j] = temp;
                 }

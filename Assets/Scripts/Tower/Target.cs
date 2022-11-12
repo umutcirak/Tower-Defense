@@ -68,18 +68,12 @@ public class Target : MonoBehaviour
 
         enemyDistance = Vector3.Distance(transform.position, closestEnemyPos.position);
 
-        var emissionModule = bulletThrower.emission;
+        var emissionModule = bulletThrower.emission;       
 
-        var emissionRate = emissionModule.rateOverTime;
+        if(enemyDistance > targetRange) { emissionModule.enabled = false; }        
+        else                            { emissionModule.enabled = true;  }
 
-        if(enemyDistance > targetRange) 
-        {
-            emissionModule.rateOverTime = emissionRate;
-        }
-        else
-        {
-            emissionModule.rateOverTime = 0;
-        }        
+            
     }
 
 

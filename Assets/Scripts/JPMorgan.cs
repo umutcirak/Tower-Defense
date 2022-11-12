@@ -8,6 +8,9 @@ public class JPMorgan : MonoBehaviour
     [SerializeField] private int balance;
     public int Balance { get { return balance; } }
 
+    [SerializeField] private int health;
+    public int Health { get { return health; } }
+
     JPMorgan instance;
     void Awake()
     {
@@ -43,5 +46,10 @@ public class JPMorgan : MonoBehaviour
     public void IncreaseBalanceByHit(int hitReward)
     {
         balance += Mathf.Abs(hitReward);
+    }
+
+    public void DecreaseHealthByEnemy(int enemyDamage)
+    {
+        health -= Mathf.Abs(enemyDamage);
     }
 }

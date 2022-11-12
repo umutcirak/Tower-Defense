@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyTower: {fileID: 3144582324300694500}
   waitTimeTarget: 0.25
-  targetRange: 5
+  targetRange: 60
 --- !u!114 &7491125747959765095
 MonoBehaviour:
   m_ObjectHideFlags: 0

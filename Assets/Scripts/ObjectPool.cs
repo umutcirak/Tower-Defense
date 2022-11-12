@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
-{  
-    [SerializeField] float waitTime;
+{
+    [SerializeField] [Range(1f,10f)] float waitTime;
     
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] int poolSize;
+    [SerializeField] [Range(0, 50)] int poolSize;
 
     GameObject[] pool;
 
