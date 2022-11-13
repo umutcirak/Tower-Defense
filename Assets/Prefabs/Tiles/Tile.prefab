@@ -185,6 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8eb820584a98c34893d5e3fe7b27a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  blockedColor: {r: 1, g: 0.069811285, b: 0.069811285, a: 1}
+  exploredColor: {r: 1, g: 0.85567, b: 0, a: 1}
+  pathColor: {r: 0.26697993, g: 1, b: 0, a: 1}
 --- !u!1 &1726795160551354749
 GameObject:
   m_ObjectHideFlags: 0

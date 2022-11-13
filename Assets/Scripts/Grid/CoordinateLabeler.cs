@@ -6,20 +6,33 @@ using TMPro;
 [ExecuteAlways]
 public class CoordinateLabeler : MonoBehaviour
 {
+    [Header("Grid Color")]
+    [SerializeField] Color defaultColor;
+    [SerializeField] Color blockedColor;
+    [SerializeField] Color exploredColor;
+    [SerializeField] Color pathColor;
+
+
     private int gridSize;
     TextMeshPro labelCoordinate;
 
     Vector2Int coordinates;
 
+    GridManager gridManager;
 
+    bool isLabeled;
+
+   
+    void Awake()
+    {
+        gridManager = FindObjectOfType<GridManager>();
+
+        labelCoordinate = GetComponent<TextMeshPro>();
+        gridSize = (int)UnityEditor.EditorSnapSettings.move.x;
+    }
     void Start()
     {
         GridSetup();
-    }
-    void Awake()
-    {
-        labelCoordinate = GetComponent<TextMeshPro>();
-        gridSize = (int)UnityEditor.EditorSnapSettings.move.x;
     }
 
     void Update()
@@ -29,13 +42,15 @@ public class CoordinateLabeler : MonoBehaviour
 
     void GridSetup()
     {
-        SetCoordinates();
+        SetCoordinates();        
+        UpdateName();      
         DisplayCoordinates();
-        UpdateName();
+        SetLabelColor();
     }
 
     void DisplayCoordinates()
     {
+        
         labelCoordinate.text = (coordinates.x + "," + coordinates.y).ToString();
     }
 
@@ -47,6 +62,21 @@ public class CoordinateLabeler : MonoBehaviour
                 
     }
 
+    // FOR DEBUGGING PATHFINDING
+    void SetLabelColor()
+    {       
+        if(gridManager == null) { return; }
+        if(!gridManager.Grid.ContainsKey(coordinates)) { return; }
+
+        Node node = gridManager.Grid[coordinates];
+
+        if      (!node.isWalkable) { labelCoordinate.color = blockedColor; }
+        else if (node.isPath)      { labelCoordinate.color = pathColor;    }
+        else if (node.isExplored)  { labelCoordinate.color = exploredColor;}
+        else                       { labelCoordinate.color = defaultColor; }
+
+    }
+    
 
     void UpdateName()
     {

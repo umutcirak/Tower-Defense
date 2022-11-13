@@ -13,10 +13,7 @@ public class Node
     public Node(Vector2Int position, bool isWalkable)
     {
         this.position = position;
-        this.isWalkable = isWalkable;
-        this.isExplored = false;
-        this.isPath = false;
-        this.parent = null;
+        this.isWalkable = isWalkable;       
     }
 
     
