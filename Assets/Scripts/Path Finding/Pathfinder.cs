@@ -17,14 +17,12 @@ public class Pathfinder : MonoBehaviour
     Vector2Int[] directions = { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
     // TRAVERSE PRIORITY
 
-    GridManager gridManager;
+    GridManager gridManager;    
     
-
     void Awake()
     {
-        gridManager = FindObjectOfType<GridManager>();
+        gridManager = FindObjectOfType<GridManager>();        
 
-       
     }
 
     void Start()
@@ -34,8 +32,33 @@ public class Pathfinder : MonoBehaviour
 
         BreadthFirstSearch();
         BuildPath();
+
+        //AgaNedenOlmuyor();
     }
        
+    void AgaNedenOlmuyor()
+    {
+        List<Vector2Int> poses = new List<Vector2Int>();
+        Vector2Int pos1 = new Vector2Int(0, 3);
+        poses.Add(pos1);
+        Vector2Int pos2 = new Vector2Int(1, 3);
+        poses.Add(pos2);
+        Vector2Int pos3 = new Vector2Int(2, 3);
+        poses.Add(pos3);
+        Vector2Int pos4 = new Vector2Int(3, 3);
+        poses.Add(pos4);
+
+        foreach (Vector2Int pos in poses)
+        {
+            Debug.Log(pos);
+            Debug.Log("Explored: " + gridManager.Grid[pos].isExplored);
+            Debug.Log("Walkable: " + gridManager.Grid[pos].isWalkable);
+            Debug.Log("Path: " +     gridManager.Grid[pos].isPath);
+
+        }
+
+
+    }
 
 
     void ExploreNeighbors()
@@ -47,14 +70,15 @@ public class Pathfinder : MonoBehaviour
             Vector2Int neighborPos = currentNode.position + direction;
 
             if (gridManager.Grid.ContainsKey(neighborPos))
-            {
+            {                
                 neighbors.Add(gridManager.Grid[neighborPos]);
-
             }
         }
 
         foreach (Node neighbor in neighbors)
         {
+            //gridManager.BlockNode(neighbor.position);
+
             if(!searchedNodes.ContainsKey(neighbor.position) && neighbor.isWalkable)
             {
                 neighbor.parent = currentNode;
@@ -106,6 +130,8 @@ public class Pathfinder : MonoBehaviour
 
         return path;
     }
+
+    
 
 
 }

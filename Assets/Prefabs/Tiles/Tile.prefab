@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c682947bc655884428eb752d749fc1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freeArea: 1
 --- !u!114 &2271404556823270183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 3219458064393657486, guid: 1628a851ec3a8814bb1969a28935f2ec, type: 3}
-  freeArea: 1
   yPos: 4.5
 --- !u!1 &2948901522283171675
 GameObject:

@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour
        
     void Start()
     {
-        StartCoroutine(CloneEnemy());
+        CloneEnemy();
         
     }
     void PopulatePool()
@@ -40,11 +40,15 @@ public class ObjectPool : MonoBehaviour
     }
 
     
-
+    void CloneEnemy()
+    {
+        if(poolSize == 0) { return; }
+        StartCoroutine(CloneEnemyCo());
+    }
     
 
-    IEnumerator CloneEnemy()
-    {
+    IEnumerator CloneEnemyCo()
+    {       
         int counter = 0;
         while(true)
         {

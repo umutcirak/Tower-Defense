@@ -13,7 +13,8 @@ public class CoordinateLabeler : MonoBehaviour
     [SerializeField] Color pathColor;
 
 
-    private int gridSize;
+    private int gridLength;
+    public int GridLength { get { return gridLength; } }
     TextMeshPro labelCoordinate;
 
     Vector2Int coordinates;
@@ -28,7 +29,7 @@ public class CoordinateLabeler : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
 
         labelCoordinate = GetComponent<TextMeshPro>();
-        gridSize = (int)UnityEditor.EditorSnapSettings.move.x;
+        gridLength = (int)UnityEditor.EditorSnapSettings.move.x;
     }
     void Start()
     {
@@ -58,7 +59,7 @@ public class CoordinateLabeler : MonoBehaviour
     {        
         Transform transformParent = GetComponentInParent<Transform>();
         coordinates = new Vector2Int((int) transformParent.position.x, 
-            (int)transformParent.position.z) / gridSize;
+            (int)transformParent.position.z) / gridLength;
                 
     }
 

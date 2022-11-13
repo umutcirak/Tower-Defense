@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class TowerBuild : MonoBehaviour
 {
-    [SerializeField] GameObject tower;
-    [SerializeField] bool freeArea;
+    [SerializeField] GameObject tower;   
     [SerializeField] float yPos;
 
     JPMorgan bank;
-
+    Waypoint waypoint;
+   
     private void Awake()
     {
         bank = FindObjectOfType<JPMorgan>();
+        waypoint = GetComponent<Waypoint>();
+   
     }
 
     private Vector3 position;
@@ -25,7 +27,7 @@ public class TowerBuild : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if (freeArea && !hasTower)
+        if (waypoint.freeArea && !hasTower)
         {
             int cost = tower.GetComponent<Tower>().cost;            
             if(cost > bank.Balance) { return; }
@@ -37,6 +39,7 @@ public class TowerBuild : MonoBehaviour
             bank.DecreaseBalanceByTower(cost);
 
             hasTower = true;
+           
         }        
     }
 

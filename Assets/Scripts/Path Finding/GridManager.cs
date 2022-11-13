@@ -10,11 +10,13 @@ public class GridManager : MonoBehaviour
     private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
     public Dictionary<Vector2Int, Node> Grid { get { return grid; } }
 
+    Waypoint[] waypoints;
 
 
     void Awake()
-    {
+    {       
         PopulateGrid();
+        BlockNodes();
     }
 
 
@@ -30,20 +32,38 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+        
 
-    Node GetNode(Vector2Int position)
+    public void BlockNodes()
     {
-        if (grid.ContainsKey(position))
+        waypoints = FindObjectsOfType<Waypoint>();
+        int gridLength = (int)UnityEditor.EditorSnapSettings.move.x;
+
+        foreach (Waypoint waypoint in waypoints)
         {
-            return grid[position];
+            if(waypoint.freeArea) { continue; }
+
+            int posX = Mathf.RoundToInt(waypoint.transform.position.x / gridLength);
+            int posZ = Mathf.RoundToInt(waypoint.transform.position.z / gridLength);
+            Vector2Int gridPos = new Vector2Int(posX, posZ);
+
+            if (grid.ContainsKey(gridPos))
+            {
+                Debug.Log(gridPos + " is blocked.");
+                grid[gridPos].isWalkable = false;
+            }
+            else
+            {
+                Debug.Log("There is no tile in pos:" + gridPos);
+            }
         }
-        else
-        {
-            return null;
-        }
+
+       
+
+       
     }
 
 
 
-   
+
 }
