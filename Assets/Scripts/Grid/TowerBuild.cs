@@ -9,39 +9,43 @@ public class TowerBuild : MonoBehaviour
 
     JPMorgan bank;
     Waypoint waypoint;
-   
+
+    private Vector3 position;    
+
+
     private void Awake()
     {
         bank = FindObjectOfType<JPMorgan>();
-        waypoint = GetComponent<Waypoint>();
-   
-    }
+        waypoint = GetComponent<Waypoint>();   
+    }    
 
-    private Vector3 position;
-    private bool hasTower;
-
-    private void Start()
+    void Start()
     {
-        position = new Vector3(transform.position.x, yPos, transform.position.z);
-        hasTower = false;       
+        position = new Vector3(transform.position.x, yPos, transform.position.z);          
     }
     void OnMouseDown()
     {
-        if (waypoint.freeArea && !hasTower)
+        BuildTower();
+    }
+
+    void BuildTower()
+    {
+        if (waypoint.freeArea && !waypoint.hasTower)
         {
-            int cost = tower.GetComponent<Tower>().cost;            
-            if(cost > bank.Balance) { return; }
+            int cost = tower.GetComponent<Tower>().cost;
+            if (cost > bank.Balance) { return; }
 
             GameObject newTower = GameObject.Instantiate(tower, position, Quaternion.identity);
             newTower.transform.parent = GameObject.Find("Towers").transform;
-            newTower.name = ( newTower.name + " " + transform.position.x + ", " + transform.position.z);
-                        
+            newTower.name = (newTower.name + " " + transform.position.x + ", " + transform.position.z);
+
             bank.DecreaseBalanceByTower(cost);
 
-            hasTower = true;
-           
-        }        
+            waypoint.hasTower = true;
+
+        }
     }
+    
 
 
 

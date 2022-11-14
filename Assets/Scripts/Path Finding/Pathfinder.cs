@@ -29,36 +29,18 @@ public class Pathfinder : MonoBehaviour
     {
         startNode = gridManager.Grid[startPos];
         destinationNode = gridManager.Grid[destinationPos];
-
-        BreadthFirstSearch();
-        BuildPath();
-
-        //AgaNedenOlmuyor();
+                
+        GetPath();               
     }
-       
-    void AgaNedenOlmuyor()
+    
+
+    List<Node> GetPath()
     {
-        List<Vector2Int> poses = new List<Vector2Int>();
-        Vector2Int pos1 = new Vector2Int(0, 3);
-        poses.Add(pos1);
-        Vector2Int pos2 = new Vector2Int(1, 3);
-        poses.Add(pos2);
-        Vector2Int pos3 = new Vector2Int(2, 3);
-        poses.Add(pos3);
-        Vector2Int pos4 = new Vector2Int(3, 3);
-        poses.Add(pos4);
-
-        foreach (Vector2Int pos in poses)
-        {
-            Debug.Log(pos);
-            Debug.Log("Explored: " + gridManager.Grid[pos].isExplored);
-            Debug.Log("Walkable: " + gridManager.Grid[pos].isWalkable);
-            Debug.Log("Path: " +     gridManager.Grid[pos].isPath);
-
-        }
-
-
+        gridManager.ResetGrid();
+        BreadthFirstSearch();
+        return BuildPath();
     }
+      
 
 
     void ExploreNeighbors()
@@ -92,10 +74,12 @@ public class Pathfinder : MonoBehaviour
 
     void BreadthFirstSearch()
     {
+        queue.Clear();
+        searchedNodes.Clear();
+
+
         bool isRunning = true;
-
         queue.Enqueue(startNode);
-
         searchedNodes.Add(startNode.position, startNode);
 
         while(isRunning && queue.Count > 0)

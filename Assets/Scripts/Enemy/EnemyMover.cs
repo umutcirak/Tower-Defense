@@ -10,9 +10,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float yPos = 4.5f;
     [SerializeField] int enemyDamage;
 
-    [SerializeField] Waypoint[] waypoints;
-
-       
+    [SerializeField] Waypoint[] waypoints;       
 
     void OnEnable()
     {       

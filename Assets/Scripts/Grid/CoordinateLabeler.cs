@@ -6,7 +6,7 @@ using TMPro;
 [ExecuteAlways]
 public class CoordinateLabeler : MonoBehaviour
 {
-    [Header("Grid Color")]
+    [Header("Grid Colors for Debugging")]
     [SerializeField] Color defaultColor;
     [SerializeField] Color blockedColor;
     [SerializeField] Color exploredColor;
@@ -33,15 +33,16 @@ public class CoordinateLabeler : MonoBehaviour
     }
     void Start()
     {
-        GridSetup();
+        TileSetup();        
     }
 
     void Update()
     {
-        if (!Application.isPlaying) { GridSetup(); }       
+        if (!Application.isPlaying) { TileSetup(); }
+        else { SetLabelColor(); }
     }
 
-    void GridSetup()
+    void TileSetup()
     {
         SetCoordinates();        
         UpdateName();      
@@ -58,8 +59,7 @@ public class CoordinateLabeler : MonoBehaviour
     void SetCoordinates()
     {        
         Transform transformParent = GetComponentInParent<Transform>();
-        coordinates = new Vector2Int((int) transformParent.position.x, 
-            (int)transformParent.position.z) / gridLength;
+        coordinates = gridManager.WorldPosToGridPos(transformParent.position);
                 
     }
 
@@ -69,7 +69,7 @@ public class CoordinateLabeler : MonoBehaviour
         if(gridManager == null) { return; }
         if(!gridManager.Grid.ContainsKey(coordinates)) { return; }
 
-        Node node = gridManager.Grid[coordinates];
+        Node node = gridManager.Grid[coordinates];        
 
         if      (!node.isWalkable) { labelCoordinate.color = blockedColor; }
         else if (node.isPath)      { labelCoordinate.color = pathColor;    }

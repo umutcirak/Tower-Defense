@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeArea: 1
+  hasTower: 0
 --- !u!114 &2271404556823270183
 MonoBehaviour:
   m_ObjectHideFlags: 0
