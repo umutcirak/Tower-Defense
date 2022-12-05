@@ -19538,7 +19538,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1888023403011622997, guid: 643a19c6258a052429e434911f927fe8, type: 3}
       propertyPath: poolSize
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1888023403011622997, guid: 643a19c6258a052429e434911f927fe8, type: 3}
       propertyPath: waitTime

@@ -7,7 +7,7 @@ public class Waypoint : MonoBehaviour
     public bool freeArea;
     public bool hasTower;
 
-    private Vector2Int gridPos;
+    public Vector2Int gridPos;
 
     GridManager gridManager;
 

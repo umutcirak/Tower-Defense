@@ -34,7 +34,7 @@ public class Pathfinder : MonoBehaviour
     }
     
 
-    List<Node> GetPath()
+    public List<Node> GetPath()
     {
         gridManager.ResetGrid();
         BreadthFirstSearch();
@@ -113,6 +113,29 @@ public class Pathfinder : MonoBehaviour
         path.Reverse();
 
         return path;
+    }
+
+    public bool WillBlockThePath(Vector2Int coordinates)
+    {
+        if(gridManager.Grid.ContainsKey(coordinates))
+        {
+            bool previousState = gridManager.Grid[coordinates].isWalkable;
+
+            gridManager.Grid[coordinates].isWalkable = false;
+            List<Node> newPath = GetPath();
+            gridManager.Grid[coordinates].isWalkable = previousState;
+
+            int minPathLength = Mathf.Abs(destinationPos.x - startPos.x) + Mathf.Abs(destinationPos.y - startPos.y);
+
+            if(newPath.Count <= minPathLength)
+            {
+                GetPath(); // Path changed to calculate blocking node, set previous back
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     

@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour
     }
 
     
-    void BlockTheNode(Vector2Int gridPos)
+    public void BlockTheNode(Vector2Int gridPos)
     {
         if(!grid.ContainsKey(gridPos)) { return; }
 
